@@ -82,3 +82,5 @@ DOCX preview runs inside `word-frame.html`, sandboxed without same-origin access
 New PDF operations accept up to 50 MiB and 1,000 pages. Images to PDF accepts up to 20 images, 50 MiB total, 20 MiB each, with the same 25-megapixel limits as the image tools. No new backend, paid APIs, analytics or advertising scripts were introduced.
 
 Footer credit: Developed by Kush.
+
+The footer now links to https://kushdigital.online/ using the official Kush Digital brand mark, stored locally as `dist/assets/kush-digital-mark.svg`.
