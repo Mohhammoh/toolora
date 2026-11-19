@@ -72,3 +72,13 @@ GA4 وSearch Console وAdSense غير مفعّلة: تحتاج معرفات وم
 تعريف الأدوات ومحتوى الصفحات موجودان في `scripts/build.py`. الواجهة المشتركة في `dist/assets/style.css` والمنطق في `dist/assets/app.js`. أضف تعريفاً وصفحة واجهة ومعالجاً للأداة الجديدة، ثم شغّل البناء والفحص. `dist` جزء من المصدر هنا ويحتوي الأصول اليدوية؛ لا تحذفه أثناء إعادة البناء.
 
 المكتبات: pdf-lib 1.17.1 وqrcode-generator 1.4.4، كلاهما بترخيص MIT. راجع `THIRD_PARTY_NOTICES.md` وملفات LICENSE في الأصول. حقوق كود Toolora المخصص تبقى لمالك المشروع؛ لم يُفرض ترخيص عام على المشروع.
+
+## PDF expansion
+
+The site now has 11 tools: the original six plus Word (.docx) to PDF, images to PDF, PDF page extraction, page removal and rotation. The new bilingual page definitions are in `scripts/pdf_tools.py`; browser logic is in `dist/assets/pdf-tools.js`.
+
+DOCX preview runs inside `word-frame.html`, sandboxed without same-origin access. Its scoped `_headers` policy is necessary for document styles and local assets; do not replace it with the main page policy. Conversion creates image-based PDF pages, preserving the visual preview approximately. Text is not selectable/searchable in this output. Complex Office formatting and legacy .doc are unsupported; review the preview.
+
+New PDF operations accept up to 50 MiB and 1,000 pages. Images to PDF accepts up to 20 images, 50 MiB total, 20 MiB each, with the same 25-megapixel limits as the image tools. No new backend, paid APIs, analytics or advertising scripts were introduced.
+
+Footer credit: Developed by Kush.

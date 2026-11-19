@@ -23,3 +23,21 @@ Additional structural checks pass for 20 localized pages: internal targets and f
 Not verified: production HTTPS/security headers, real Cloudflare deployment, Safari/Firefox, physical mobile devices, assistive technology, malicious file resilience, all PDF form/signature variants, real-world scan performance for all QR colors, GA4, Search Console and AdSense integration. These services are not enabled.
 
 Structural checks can be rerun with `python3 scripts/check.py`. Browser assertions used Playwright Core 1.56.1 and a locally installed Google Chrome. PDF fixture outputs were read back with pdf-lib; QR output was independently decoded with jsQR 1.4.0. Development fixtures and browser screenshots are excluded from the deliverable.
+
+## PDF expansion and footer credit — 19 November 2026
+
+Added five tools, bringing the total to 11, with 30 localized pages. The footer on each page now reads `Developed by Kush`.
+
+19 additional browser assertions passed:
+- Page extraction output was read back and verified to preserve requested page order.
+- Out-of-range requests and removal of every page are rejected.
+- Arabic page-number input works for removal.
+- Rotation changes selected pages only, verified from the resulting PDF page dictionaries.
+- Images produce a correctly ordered, dimensioned multi-page PDF.
+- A DOCX fixture with English and Arabic text, an explicit page break and an embedded PNG exports to two PDF pages. Actual embedded PDF image content was visually reviewed. Processing requests were restricted to local assets and data/blob resources.
+- Unsupported Word input is rejected.
+- All five new tool pages fit a 390px viewport in both languages.
+
+The Word renderer is isolated in a sandboxed iframe without same-origin permissions. Only that document renderer allows generated inline styles; the main site policy stays unchanged. The new renderer-specific hosting header must be checked on production.
+
+Word conversion limitations are explicit in the UI: DOCX only, 15 MiB input, up to 30 rendered pages and 100 MiB expanded content; image-based PDF output, approximate layout and no selectable text. Legacy DOC, exact Microsoft Word fidelity and broad document corpus compatibility are not claimed. This release has been tested in Chrome; Safari/Firefox remain unverified.

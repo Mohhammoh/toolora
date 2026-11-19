@@ -28,6 +28,6 @@ for lang in ['en','ar']:
   if os.getenv('SITE_URL'):
    assert len(doc.canonical)==1 and {'en','ar'}.issubset(doc.alternates)
   count+=1
-assert count==20
+assert count==30
 for lib in ['qrcode.js','pdf-lib.min.js']:assert (root/'assets'/lib).stat().st_size>10000
 print(f'PASS: {count} localized pages; internal links, fragments, language, direction, unique IDs and bundled libraries.')
